@@ -1,0 +1,24 @@
+
+
+body {
+    font-family: times-new-roman;
+    font-size: 8; 
+    padding: 3em;
+}
+
+code {
+    background-color: lightgray;
+}
+
+pre {
+    margin-left: 3em;
+}
+
+h2 {
+    text-decoration: underline;
+}
+
+h3 {
+    margin: 2px;
+    padding: 1px;
+}

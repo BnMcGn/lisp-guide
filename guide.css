@@ -1,0 +1,10 @@
+
+.glossary {
+    background-color: lightgoldenrodyellow;
+    float: right;
+    width: 40%;
+    padding: 1em;
+    margin: 2em;
+    border: 2px;
+    border-color: black;
+}
