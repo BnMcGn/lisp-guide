@@ -1,0 +1,281 @@
+<html>
+  <head>
+    <title>REPL Exploration Guide - Common Lisp</title>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+    <link href='guide.css' rel='stylesheet' type='text/css' />
+  </head>
+  <body>
+
+
+
+    <h1>Common Lisp REPL Exploration Guide</h1>
+
+    <p>Emacs/Slime edition</p>
+
+<div class="glossary">
+<h2>Glossary</h2>
+
+<h3>symbol</h3>
+
+<p>A name. Like a variable, but can be used without an attached value.</p>
+
+<h3>system</h3>
+
+<p>A library</p>
+
+<h3>package</h3>
+
+<p>A module, more fine-grained than a system. Systems often contain multiple packages.</p>
+
+<h3>(at) point</h3>
+
+<p>Emacs will often apply commands to the item under the cursor. This item is said to be at point.</p>
+
+<h3>M-</h3>
+
+<p>A reference to the <em>meta</em> modifier key. This is usually the Alt key on PCs and the command key on Macs. </p>
+
+<h3>repl</h3>
+
+<p>The interactive prompt of a live lisp session.</p>
+
+<h3>quicklisp, alias ql</h3>
+
+<p>Common Lisp's de facto package manager.</p>
+
+</div>
+
+<h2>Starting and Stopping Lisp</h2>
+
+<h3>Start lisp from within emacs</h3>
+
+<pre><code>M-x slime
+</code></pre>
+
+<h3>Stop the lisp repl in emacs</h3>
+
+<pre><code>&gt; ,quit
+</code></pre>
+
+<h2>Surroundings</h2>
+
+<h3>List of available functions</h3>
+
+<h3>Last three items in result history (most recent first)</h3>
+
+<pre><code>&gt; *
+&gt; **
+&gt; ***
+</code></pre>
+
+<h3>Last three items in command history (most recent first)</h3>
+
+<pre><code>&gt; +
+&gt; ++
+&gt; +++
+</code></pre>
+
+<h3>Cycle though command history (previous, next item)</h3>
+
+<pre><code>M-p
+M-n
+</code></pre>
+
+<h3>Search command history for things that start with <em>search</em></h3>
+
+<pre><code>&gt; <i>search</i> M-p
+</code></pre>
+
+<h2>Available Packages &amp; Quicklisp</h2>
+
+<h3>List all loaded packages</h3>
+
+<pre><code>&gt; (list-all-packages)
+</code></pre>
+
+<h3>List all packages imported into a package</h3>
+
+<pre><code>&gt; (package-use-list (find-package '<i>package</i>))
+</code></pre>
+
+<h3>List of all available systems in the quicklisp repository</h3>
+
+<pre><code>&gt; (ql:system-list)
+</code></pre>
+
+<h3>Search the list of systems</h3>
+
+<pre><code>&gt; (ql:system-apropos <i>search</i>)
+</code></pre>
+
+<h3>Install and load a system</h3>
+
+<pre><code>&gt; (ql:quickload '<i>system</i>)
+</code></pre>
+
+<h3>Contents of a loaded package</h3>
+
+<pre><code>&gt; <i>package</i>:&lt;tab&gt;
+</code></pre>
+
+<h3>Contents of a package, including internal symbols</h3>
+
+<pre><code>&gt; <i>package</i>::&lt;tab&gt;
+</code></pre>
+
+<h2>Symbols and Objects </h2>
+
+<h3>Is symbol in use?</h3>
+
+<pre><code>&gt; (boundp '<i>var</i>)
+</code></pre>
+
+<h3>Is symbol used in the function namespace?</h3>
+
+<pre><code>&gt; (fboundp '<i>var</i>)
+</code></pre>
+
+<h3>List all of the symbols in the current namespace</h3>
+
+<pre><code>&gt; (apropos "" *package*)
+</code></pre>
+
+<h3>Originating package of a symbol</h3>
+
+<pre><code>&gt; (symbol-package '<i>var</i>)
+</code></pre>
+
+<h3>Search for <em>thing</em> in the symbol list (with optional package specifier)</h3>
+
+<pre><code>&gt; (apropos "thing" '<i>package</i>)
+</code></pre>
+
+<h3>Docstring</h3>
+
+<pre><code>&gt; (describe <i>var</i>)</code> or <code>C-c C-d d</code> on point</pre>
+
+<h3>Type of an object</h3>
+
+<pre><code>&gt; (type-of <i>var</i>)
+</code></pre>
+
+<h3>Object inspector</h3>
+
+<pre><code>&gt; (inspect <i>var</i>)
+</code></pre>
+
+<h3>Inheritance tree for a class</h3>
+
+<pre><code>M-x slime-browse-classes
+</code></pre>
+
+<h3>List methods specializing on a class </h3>
+
+<pre><code>M-x slime-who-specializes
+</code></pre>
+
+<h2>Paths, locations, config files</h2>
+
+<h3>Lisp executable location</h3>
+
+<pre><code>M-: inferior-lisp-program
+</code></pre>
+
+<h3>Version and variety of Common Lisp</h3>
+
+<pre><code>&gt; (lisp-implementation-version)
+&gt; (lisp-implementation-type)
+</code></pre>
+
+<h3>Operating system and machine info</h3>
+
+<pre><code>&gt; (software-version)
+&gt; (machine-version)
+</code></pre>
+
+<h3>Show the recommended folder for your projects</h3>
+
+<pre><code>&gt; ql:*local-project-directories*
+</code></pre>
+
+<h3>Location of a specific system</h3>
+
+<pre><code>&gt; (ql:where-is-system '<i>system</i>)
+</code></pre>
+
+<h3>Name of start up configuration file for your lisp</h3>
+
+<pre><code>&gt; (ql-impl-util::init-file-name-for (lisp-implementation-type))
+</code></pre>
+
+<h2>Code navigation</h2>
+
+<h3>Jump to the definition of the item at point</h3>
+
+<pre><code>M-.
+</code></pre>
+
+<h3>Return from jump</h3>
+
+<pre><code>M-,
+</code></pre>
+
+<h3>List callers of a function</h3>
+
+<pre><code>C-c &lt;
+</code></pre>
+
+<h3>List functions that a function calls (callees)</h3>
+
+<pre><code>C-c &gt;
+</code></pre>
+
+<h3>Show the references, bindings or assignments of the global variable at point</h3>
+
+<pre><code>C-c C-w r</code> <code>C-c C-w b</code> <code>C-c C-w s</code>
+</code></pre>
+
+<h3>Look up documentation for the symbol at point in the Common Lisp Hyperspec</h3>
+
+<pre><code>C-c C-d h
+</code></pre>
+
+<p>Note: only for symbols defined in the Common Lisp standard</p>
+
+<h2>Macros</h2>
+
+<h3>Examine a macro expansion</h3>
+
+<p>Given the following loop macro invocation:</p>
+
+  <pre><code>(loop for i from 1 to 3 do (print i))</code></pre>
+
+<p>This will show the expansion:</p>
+  <pre><code>(macroexpand-1 '(loop for i from 1 to 3 do (print i)))</code></pre>
+
+<h3>Explore the currently available reader macros</h3>
+
+<pre><code>&gt; (inspect *readtable*)
+</code></pre>
+
+<p>Note: not user friendly</p>
+
+<h2>Crashes and errors</h2>
+
+<h3>Stop a runaway process</h3>
+
+<pre><code>C-c C-c
+</code></pre>
+
+<h3>Getting back to normal from the debugger</h3>
+
+<pre><code>q</code> - or select <code>[Abort]</code>
+</code></pre>
+
+
+<h2>More References</h2>
+
+<p>M-x slime-cheat-sheet</p>
+
+  </body>
+  </html>
