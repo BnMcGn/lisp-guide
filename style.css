@@ -22,3 +22,8 @@ h3 {
     margin: 2px;
     padding: 1px;
 }
+
+table {
+    padding: 1em;
+    padding-left: 3em;
+}
