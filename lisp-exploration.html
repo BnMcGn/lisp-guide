@@ -76,6 +76,13 @@
 &gt; ***
 </code></pre>
 
+<h3>Last three items in result history (most recent first) as a list of all values</h3>
+
+<pre><code>&gt; /
+&gt; //
+&gt; ///
+</code></pre>
+
 <h3>Last three items in command history (most recent first)</h3>
 
 <pre><code>&gt; +
@@ -167,10 +174,64 @@ M-n
 <pre><code>&gt; (type-of <i>var</i>)
 </code></pre>
 
-<h3>Object inspector</h3>
+<h3>Inspect item at point</h3>
+
+<pre><code>C-c C-v C-i</code></pre>
+ 
+<table>
+  <th>Inspector commands</th>
+    <tr>
+      <td>&lt;enter&gt;</td>
+      <td>Inspect or act on the item at point</td>
+      </tr>
+    <tr>
+      <td>l</td>
+      <td>Return from an inspection</td>
+      </tr>
+    <tr>
+      <td>&lt;tab&gt; </td>
+      <td>Jump to next inspectable</td>
+      </tr>
+    <tr>
+      <td>Shift-&lt;tab&gt; </td>
+      <td>Jump to previous inspectable</td>
+      </tr>
+    <tr>
+      <td>d</td>
+      <td>Describe</td>
+      </tr>
+    <tr>
+      <td>e</td>
+      <td>Evaluate an expression</td>
+      </tr>
+    <tr>
+      <td>v</td>
+      <td>Toggle verbose mode</td>
+      </tr>
+    <tr>
+      <td>q</td>
+      <td>Quit</td>
+      </tr>
+    <tr>
+      <td>p</td>
+      <td>Pretty print object at point</td>
+      </tr>
+    <tr>
+      <td>.</td>
+      <td>Jump to source</td>
+      </tr>
+    <tr>
+      <td>M-&lt;enter&gt;</td>
+      <td>Store value at point in '*' for access in REPL</td>
+    </tr>
+    </table>
+
+
+<h3>Another inspector</h3>
 
 <pre><code>&gt; (inspect <i>var</i>)
 </code></pre>
+
 
 <h3>Inheritance tree for a class</h3>
 
